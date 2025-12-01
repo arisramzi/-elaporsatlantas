@@ -84,8 +84,6 @@
 
 ## Persyaratan untuk Instalasi
 
-Pastikan terlebih dulu Anda memenuhi persyaratan berikut:
-
 - PHP 8.0+
 - Web Server (Apache)
 - Database (MySQL atau MariaDB)
@@ -97,7 +95,6 @@ Pastikan terlebih dulu Anda memenuhi persyaratan berikut:
 ## Cara Instalasi eLaporSatlantas
 
 ### 1. Persyaratan
-Pastikan terlebih dulu Anda memenuhi persyaratan berikut:
 
 - PHP versi 8.0+
 - Web Server (Apache)
@@ -109,7 +106,7 @@ Pastikan terlebih dulu Anda memenuhi persyaratan berikut:
 Pertama, clone repository dari GitHub dengan perintah berikut:
 
 ```bash
-git clone https://github.com/arisramzi/elaporsatlantas.git
+git clone https://github.com/arisramzi/-elaporsatlantas.git
 ```
 
 ### 3. Masuk ke Direktori Proyek
@@ -165,11 +162,14 @@ Jalankan perintah berikut untuk membuat tabel di database:
 ```bash
 php artisan migrate
 ```
-
 ### 10. Jalankan Server
+Jalankan server lokal dengan perintah dengan menggunakan command prompt:
+```bash
+npm run dev
+```
+### 11. Jalankan Server
 Jalankan server lokal dengan perintah berikut:
 
 ```bash
-npm run dev
 php artisan serve
 ```
