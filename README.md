@@ -163,7 +163,7 @@ Jalankan perintah berikut untuk membuat tabel di database:
 php artisan migrate
 ```
 ### 10. Jalankan Server
-Jalankan server lokal dengan perintah dengan menggunakan command prompt:
+Jalankan server lokal dengan menggunakan perintah command prompt:
 ```bash
 npm run dev
 ```
