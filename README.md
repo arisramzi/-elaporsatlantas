@@ -63,10 +63,10 @@
 - Password: `password`
 
 ## ERD
-![alt text](ERD.png)
+![alt text](ERD_UML/ERD.png)
 
 ## UML
-![alt text](UML.png)
+![alt text](ERD_UML/UML.png)
 
 ## Teknologi yang Digunakan
 - Laravel 10 (Web Framework)
