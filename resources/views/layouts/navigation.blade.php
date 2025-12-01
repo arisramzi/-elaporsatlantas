@@ -11,11 +11,7 @@
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium leading-5 text-white focus:outline-none transition duration-150 ease-in-out">
-                        Dashboard
-                    </a>
-                    </div>
+               
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

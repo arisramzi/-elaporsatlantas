@@ -69,6 +69,10 @@ Route::middleware(['auth', 'role:masyarakat'])
         Route::put('/laporan/{id}', [\App\Http\Controllers\Masyarakat\LaporController::class, 'update'])
             ->name('laporan.update');
 
+        // Hapus/Remove Foto Laporan (Masyarakat)
+        Route::delete('/laporan/{id}/hapus-foto', [\App\Http\Controllers\Masyarakat\LaporController::class, 'hapusFoto'])
+            ->name('laporan.hapus-foto');
+
         // --- HAPUS ---
         Route::delete('/laporan/{id}', [\App\Http\Controllers\Masyarakat\LaporController::class, 'destroy'])
             ->name('laporan.destroy');
@@ -120,6 +124,10 @@ Route::middleware(['auth', 'role:admin'])
         // Update Laporan (Simpan Perubahan)
         Route::put('/laporan/{id}/update-data', [\App\Http\Controllers\Admin\LaporanController::class, 'updateLaporan'])
             ->name('laporan.update-data'); // Nama beda biar ga bentrok sama update status
+
+        // Hapus/Remove Foto Laporan (Admin)
+        Route::delete('/laporan/{id}/hapus-foto', [\App\Http\Controllers\Admin\LaporanController::class, 'hapusFoto'])
+            ->name('laporan.hapus-foto');
 
         // Hapus Laporan
         Route::delete('/laporan/{id}', [\App\Http\Controllers\Admin\LaporanController::class, 'destroy'])

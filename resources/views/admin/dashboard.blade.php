@@ -185,23 +185,5 @@
 
         </div>
     </div>
-
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                
-                <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-                    <h3 class="text-blue-400 font-bold uppercase text-xs tracking-wider mb-4">Distribusi Status Laporan</h3>
-                    <div class="relative h-64 w-full flex justify-center">
-                        <canvas id="statusChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-                    <h3 class="text-emerald-400 font-bold uppercase text-xs tracking-wider mb-4">Statistik Laporan Bulanan ({{ date('Y') }})</h3>
-                    <div class="relative h-64 w-full">
-                        <canvas id="bulanChart"></canvas>
-                    </div>
-                </div>
-
-            </div>
     
 </x-app-layout>

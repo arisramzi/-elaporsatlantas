@@ -104,6 +104,7 @@
                                 <th class="px-6 py-3">Foto</th>
                                 <th class="px-6 py-3">Judul</th>
                                 <th class="px-6 py-3">Kategori</th>
+                                <th class="px-6 py-3">Lokasi</th>
                                 <th class="px-6 py-3">Tanggal</th>
                                 <th class="px-6 py-3 text-center">Status</th>
                                 <th class="px-6 py-3 text-right">Aksi</th>
@@ -132,6 +133,8 @@
                                         {{ $laporan->kategori->nama_kategori ?? 'Umum' }}
                                     </span>
                                 </td>
+
+                                <td class="px-6 py-4 text-sm text-slate-400">{{ Str::limit($laporan->lokasi_kejadian ?? '-', 40) }}</td>
 
                                 <td class="px-6 py-4 text-sm text-slate-400">{{ \Carbon\Carbon::parse($laporan->tgl_pengaduan)->format('d M Y') }}</td>
 
@@ -176,7 +179,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center py-10 text-gray-500">Belum ada laporan.</td>
+                                <td colspan="8" class="text-center py-10 text-gray-500">Belum ada laporan.</td>
                             </tr>
                             @endforelse
                         </tbody>

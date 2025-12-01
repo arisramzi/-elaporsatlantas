@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pengaduan; // Panggil Model Pengaduan
 use App\Models\User; // <--- TAMBAHKAN INI
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LaporanController extends Controller
 {
@@ -156,15 +157,45 @@ class LaporanController extends Controller
         $request->validate([
             'judul_laporan' => 'required|string|max:255',
             'isi_laporan' => 'required',
-            // Tambahkan validasi lain jika perlu
+            'kategori_id' => 'nullable|exists:kategoris,id',
+            'foto_kejadian' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'lokasi_kejadian' => 'nullable|string|max:255',
         ]);
 
-        $pengaduan->update([
+        // Siapkan data untuk update
+        $data = [
             'judul_laporan' => $request->judul_laporan,
             'isi_laporan' => $request->isi_laporan,
             'kategori_id' => $request->kategori_id,
-            // Update field lain sesuai kebutuhan
-        ]);
+            'lokasi_kejadian' => $request->lokasi_kejadian,
+        ];
+
+        // Jika ada file foto baru, simpan dan hapus file lama
+        if ($request->hasFile('foto_kejadian') && $request->file('foto_kejadian')->isValid()) {
+            $file = $request->file('foto_kejadian');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '_' . Str::random(8) . '.' . $ext;
+
+            // Pastikan folder tujuan ada
+            $targetDir = public_path('bukti_laporan');
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+
+            // Pindahkan file
+            $file->move($targetDir, $filename);
+
+            // Hapus file lama jika ada
+            if ($pengaduan->foto_kejadian && file_exists($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian)) {
+                @unlink($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian);
+            }
+
+            // Set nama file baru ke data update
+            $data['foto_kejadian'] = $filename;
+        }
+
+        // Lakukan update
+        $pengaduan->update($data);
 
         return redirect()->route('admin.laporan.index')->with('success', 'Data laporan berhasil diperbarui!');
     }
@@ -175,13 +206,30 @@ class LaporanController extends Controller
         $pengaduan = Pengaduan::findOrFail($id);
         
         // Hapus file foto jika ada (agar hemat penyimpanan)
-        if ($pengaduan->foto_kejadian && file_exists(public_path('bukti_laporan/' . $pengaduan->foto_kejadian))) {
-            unlink(public_path('bukti_laporan/' . $pengaduan->foto_kejadian));
+        $targetDir = public_path('bukti_laporan');
+        if ($pengaduan->foto_kejadian && file_exists($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian)) {
+            @unlink($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian);
         }
 
         $pengaduan->delete();
 
         return redirect()->route('admin.laporan.index')->with('success', 'Laporan berhasil dihapus.');
+    }
+
+    // Hapus hanya foto laporan (Admin)
+    public function hapusFoto($id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+
+        $targetDir = public_path('bukti_laporan');
+        if ($pengaduan->foto_kejadian && file_exists($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian)) {
+            @unlink($targetDir . DIRECTORY_SEPARATOR . $pengaduan->foto_kejadian);
+        }
+
+        $pengaduan->foto_kejadian = null;
+        $pengaduan->save();
+
+        return redirect()->back()->with('success', 'Foto laporan berhasil dihapus.');
     }
 
 }

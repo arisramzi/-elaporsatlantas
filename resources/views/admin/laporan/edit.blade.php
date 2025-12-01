@@ -55,6 +55,12 @@
                         </div>
 
                         <div>
+                            <label class="block text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Lokasi Kejadian</label>
+                            <input type="text" name="lokasi_kejadian" value="{{ $pengaduan->lokasi_kejadian }}" 
+                                   class="w-full bg-slate-900 border border-slate-600 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-slate-600">
+                        </div>
+
+                        <div>
                             <label class="block text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Detail Laporan</label>
                             <textarea name="isi_laporan" rows="6" 
                                       class="w-full bg-slate-900 border border-slate-600 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">{{ $pengaduan->isi_laporan ?? $pengaduan->detail_laporan }}</textarea>
