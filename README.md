@@ -66,7 +66,7 @@
 ![alt text](ERD_UML/ERD.png)
 
 ## UML
-![alt text](ERD_UML/UML.png)
+![alt text](ERD_UML/UML.jpg)
 
 ## Teknologi yang Digunakan
 - Laravel 10 (Web Framework)
@@ -164,6 +164,7 @@ php artisan migrate
 ```
 ### 10. Jalankan Server
 Jalankan server lokal dengan menggunakan perintah command prompt:
+
 ```bash
 npm run dev
 ```
